@@ -36,6 +36,7 @@ showBtn.addEventListener('click', () => {
     alert('Please select a car price range.');
     return;
   }
+
   const auction = auctionSelect.value;
   const location = locationSelect.value;
 
@@ -44,7 +45,7 @@ showBtn.addEventListener('click', () => {
     return;
   }
 
-  // ✅ Special rule
+  // ✅ Special rule: Copart + AK-Anchorage + 1–3000$
   if (
     auction === 'copart' &&
     location === 'AK-Anchorage' &&
@@ -54,9 +55,9 @@ showBtn.addEventListener('click', () => {
     return;
   }
 
-  // Default calculation (fallback for all other cases)
+  // Default calculation (for all other cases)
   const [min, max] = selectedRange.split('-').map(Number);
-  const price = (min + max) / 2;
+  const price = (min + max) / 2; // midpoint for now
 
   const auctionFee = auction === 'copart' ? price * 0.12 : price * 0.10;
   const locationFee = location === 'AK-Anchorage' ? 75 : 0;

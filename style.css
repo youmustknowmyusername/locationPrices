@@ -5,19 +5,31 @@ body {
 }
 
 #app {
-  background: white;
+  background: #fff;
   padding: 20px;
   border-radius: 8px;
-  max-width: 400px;
+  max-width: 420px;
 }
 
 label {
   display: block;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 input, select, button {
   width: 100%;
   padding: 8px;
-  margin-top: 5px;
+  margin-top: 6px;
 }
+
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+#price-buttons button {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius:

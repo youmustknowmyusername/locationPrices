@@ -57,7 +57,7 @@ showBtn.addEventListener('click', () => {
 
   // Default calculation (for all other cases)
   const [min, max] = selectedRange.split('-').map(Number);
-  const price = (min + max) / 2; // midpoint for now
+  const price = (min + max) / 2;
 
   const auctionFee = auction === 'copart' ? price * 0.12 : price * 0.10;
   const locationFee = location === 'AK-Anchorage' ? 75 : 0;

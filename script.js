@@ -6,8 +6,8 @@ const showBtn = document.getElementById('show');
 
 let selectedRange = null;
 
+// update locations when auction changes
 function updateLocations() {
-  // reset locations
   locationSelect.innerHTML = '<option value="">--Choose--</option>';
 
   if (auctionSelect.value === 'copart') {
@@ -18,13 +18,9 @@ function updateLocations() {
   }
 }
 
-auctionSelect.addEventListener('change', () => {
-  updateLocations();
-  // also reset selection on auction change
-  locationSelect.value = '';
-});
+auctionSelect.addEventListener('change', updateLocations);
 
-// handle selecting a price range
+// mark selected range
 priceButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     selectedRange = btn.dataset.range;
@@ -33,6 +29,7 @@ priceButtons.forEach(btn => {
   });
 });
 
+// calculate when "Show" clicked
 showBtn.addEventListener('click', () => {
   if (!selectedRange) {
     alert('Please select a car price range.');
@@ -47,11 +44,14 @@ showBtn.addEventListener('click', () => {
   }
 
   const [min, max] = selectedRange.split('-').map(Number);
-  // temporary calculation uses midpoint of the chosen range
-  const price = (min + max) / 2;
+  const price = (min + max) / 2; // midpoint for now
 
-  // placeholder fee logic
   const auctionFee = auction === 'copart' ? price * 0.12 : price * 0.10;
   const locationFee = location === 'AK-Anchorage' ? 75 : 0;
 
-  const total = price + auct
+  const total = price + auctionFee + locationFee;
+  resultEl.textContent = `Range: $${min} - $${max} → Total: $${total.toFixed(2)}`;
+});
+
+// initialize
+updateLocations();

@@ -1,7 +1,7 @@
 const auctionSelect = document.getElementById('auction');
 const locationSelect = document.getElementById('location');
-const calculateBtn = document.getElementById('calculate');
 const resultEl = document.getElementById('result');
+const priceButtons = document.querySelectorAll('#price-buttons button');
 
 function updateLocations() {
   locationSelect.innerHTML = '<option value="">--Choose--</option>'; // reset
@@ -16,21 +16,27 @@ function updateLocations() {
 
 auctionSelect.addEventListener('change', updateLocations);
 
-calculateBtn.addEventListener('click', () => {
-  const auction = auctionSelect.value;
-  const location = locationSelect.value;
-  const price = parseFloat(document.getElementById('price').value);
+// Handle price button clicks
+priceButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const auction = auctionSelect.value;
+    const location = locationSelect.value;
+    const [min, max] = button.dataset.range.split('-').map(Number);
 
-  if (!auction || !location || isNaN(price)) {
-    alert("Please select auction, location, and enter price.");
-    return;
-  }
+    if (!auction || !location) {
+      alert("Please select auction and location first.");
+      return;
+    }
 
-  // Example fee logic
-  let auctionFee = auction === "copart" ? price * 0.12 : price * 0.1;
-  let locationFee = location === "AK-Anchorage" ? 75 : 0;
+    // Pick a midpoint of the range for fee calculation (you can adjust logic later)
+    const price = (min + max) / 2;
 
-  let total = price + auctionFee + locationFee;
+    // Example fee logic
+    let auctionFee = auction === "copart" ? price * 0.12 : price * 0.1;
+    let locationFee = location === "AK-Anchorage" ? 75 : 0;
 
-  resultEl.innerText = `Total: $${total.toFixed(2)}`;
+    let total = price + auctionFee + locationFee;
+
+    resultEl.innerText = `Range: $${min} - $${max} → Total: $${total.toFixed(2)}`;
+  });
 });

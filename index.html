@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Car Auction Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Car Auction Calculator</h1>
+  <div id="app">
+    <label for="auction">Select Auction:</label>
+    <select id="auction">
+      <option value="">--Choose--</option>
+      <option value="copart">Copart</option>
+      <option value="iaai">IAAI</option>
+    </select>
+
+    <label for="location">Select Location:</label>
+    <select id="location">
+      <option value="">--Choose--</option>
+      <option value="NY">New York</option>
+      <option value="CA">California</option>
+    </select>
+
+    <label for="price">Car Price ($):</label>
+    <input type="number" id="price" placeholder="Enter price">
+
+    <button id="calculate">Calculate</button>
+
+    <h2 id="result">Total: $0</h2>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -3,7 +3,6 @@ const locationSelect = document.getElementById('location');
 const calculateBtn = document.getElementById('calculate');
 const resultEl = document.getElementById('result');
 
-// function to update locations
 function updateLocations() {
   locationSelect.innerHTML = '<option value="">--Choose--</option>'; // reset
 
@@ -15,11 +14,7 @@ function updateLocations() {
   }
 }
 
-// run when auction changes
 auctionSelect.addEventListener('change', updateLocations);
-
-// also run once on page load (in case Copart is pre-selected)
-updateLocations();
 
 calculateBtn.addEventListener('click', () => {
   const auction = auctionSelect.value;

@@ -16,7 +16,7 @@ label {
   margin-top: 12px;
 }
 
-input, select, button {
+select, button {
   width: 100%;
   padding: 8px;
   margin-top: 6px;
@@ -31,5 +31,13 @@ input, select, button {
 
 #price-buttons button {
   cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius:
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+#price-buttons button.active {
+  border-color: #333;
+  background: #eee;
+  font-weight: 600;
+}

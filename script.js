@@ -3,9 +3,9 @@ const locationSelect = document.getElementById('location');
 const calculateBtn = document.getElementById('calculate');
 const resultEl = document.getElementById('result');
 
-// Watch auction changes
-auctionSelect.addEventListener('change', () => {
-  locationSelect.innerHTML = '<option value="">--Choose--</option>'; // reset locations
+// function to update locations
+function updateLocations() {
+  locationSelect.innerHTML = '<option value="">--Choose--</option>'; // reset
 
   if (auctionSelect.value === 'copart') {
     let option = document.createElement('option');
@@ -13,7 +13,13 @@ auctionSelect.addEventListener('change', () => {
     option.textContent = "AK-Anchorage";
     locationSelect.appendChild(option);
   }
-});
+}
+
+// run when auction changes
+auctionSelect.addEventListener('change', updateLocations);
+
+// also run once on page load (in case Copart is pre-selected)
+updateLocations();
 
 calculateBtn.addEventListener('click', () => {
   const auction = auctionSelect.value;

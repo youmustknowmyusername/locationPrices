@@ -45,14 +45,20 @@ showBtn.addEventListener('click', () => {
     return;
   }
 
-  // ✅ Special rule: Copart + AK-Anchorage + 1–3000$
-  if (
-    auction === 'copart' &&
-    location === 'AK-Anchorage' &&
-    selectedRange === '1-3000'
-  ) {
-    resultEl.textContent = 'Total: $5,340';
-    return;
+  // ✅ Special rules for Copart AK-Anchorage
+  if (auction === 'copart' && location === 'AK-Anchorage') {
+    if (selectedRange === '1-3000') {
+      resultEl.textContent = 'Total: $5,340';
+      return;
+    }
+    if (selectedRange === '3001-7000') {
+      resultEl.textContent = 'Total: $5,390';
+      return;
+    }
+    if (selectedRange === '7001-150000') {
+      resultEl.textContent = 'Total: $5,540';
+      return;
+    }
   }
 
   // Default calculation (for all other cases)

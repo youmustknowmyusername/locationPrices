@@ -7,51 +7,51 @@ const showBtn = document.getElementById('show');
 let selectedRange = null;
 
 function updateLocations() {
-  locationSelect.innerHTML = '<option value="">--Choose--</option>'; // reset
+  // reset locations
+  locationSelect.innerHTML = '<option value="">--Choose--</option>';
 
   if (auctionSelect.value === 'copart') {
-    let option = document.createElement('option');
-    option.value = "AK-Anchorage";
-    option.textContent = "AK-Anchorage";
-    locationSelect.appendChild(option);
+    const opt = document.createElement('option');
+    opt.value = 'AK-Anchorage';
+    opt.textContent = 'AK-Anchorage';
+    locationSelect.appendChild(opt);
   }
 }
 
-auctionSelect.addEventListener('change', updateLocations);
+auctionSelect.addEventListener('change', () => {
+  updateLocations();
+  // also reset selection on auction change
+  locationSelect.value = '';
+});
 
-// save selected range when clicked
-priceButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    selectedRange = button.dataset.range;
+// handle selecting a price range
+priceButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectedRange = btn.dataset.range;
     priceButtons.forEach(b => b.classList.remove('active'));
-    button.classList.add('active');
+    btn.classList.add('active');
   });
 });
 
-// calculate only when "Show" button is clicked
 showBtn.addEventListener('click', () => {
   if (!selectedRange) {
-    alert("Please select a car price range.");
+    alert('Please select a car price range.');
     return;
   }
-
   const auction = auctionSelect.value;
   const location = locationSelect.value;
-  const [min, max] = selectedRange.split('-').map(Number);
 
   if (!auction || !location) {
-    alert("Please select auction and location first.");
+    alert('Please select auction and location first.');
     return;
   }
 
-  // Pick midpoint of range for now
+  const [min, max] = selectedRange.split('-').map(Number);
+  // temporary calculation uses midpoint of the chosen range
   const price = (min + max) / 2;
 
-  // Example fee logic
-  let auctionFee = auction === "copart" ? price * 0.12 : price * 0.1;
-  let locationFee = location === "AK-Anchorage" ? 75 : 0;
+  // placeholder fee logic
+  const auctionFee = auction === 'copart' ? price * 0.12 : price * 0.10;
+  const locationFee = location === 'AK-Anchorage' ? 75 : 0;
 
-  let total = price + auctionFee + locationFee;
-
-  resultEl.innerText = `Range: $${min} - $${max} → Total: $${total.toFixed(2)}`;
-});
+  const total = price + auct

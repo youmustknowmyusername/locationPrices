@@ -20,16 +20,17 @@ function updateLocations() {
 
 auctionSelect.addEventListener('change', updateLocations);
 
-// mark selected range
+// handle selecting a price range
 priceButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     selectedRange = btn.dataset.range;
+
+    // reset all, then highlight selected
     priceButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   });
 });
 
-// calculate when "Show" clicked
 showBtn.addEventListener('click', () => {
   if (!selectedRange) {
     alert('Please select a car price range.');
